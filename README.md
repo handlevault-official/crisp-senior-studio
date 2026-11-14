@@ -1,43 +1,49 @@
-# 🛡️ Crisp Suite Ecosystem Hub
+# Crisp Senior Studio 🛡️
 
-Welcome to the **Crisp Suite** centralized repository and ecosystem hub! This repository serves as the single source of truth for our apps, digital assets, license verification workflows, and unified transaction management.
+A local-first, offline-capable health and daily care assistant built for senior citizens, family members, and caregivers. Part of the **Crisp Suite / HandleVault** ecosystem.
 
-## 🚀 Overview
-Crisp Suite integrates automated platform sales (Gumroad, Ko-fi) and manual local payments (GCash, Maya, Maya Bank) into a single, cohesive developer and creator ecosystem.
+## ✨ Features
 
-## 📦 Core Product Suite & Live Links
-* **Pixel Art Studio:** https://handlevault-official.github.io/crisp-pixel/
-* **Moonlit Beads Blueprint:** https://handlevault-official.github.io/crisp-moonlit-beads-blueprint-studio/
-* **Resume & CV Studio:** https://handlevault-official.github.io/crisp-resume-CV-studio/
-* **Invoice Studio:** https://handlevault-official.github.io/crisp-invoice-studio/
-* **GitVoice Clinical Dashboard:** https://handlevault-official.github.io/gitvoice-clinical-dashboard/
-* **Kusina AI:** https://handlevault-official.github.io/kusina-ai/
-* **Crisp Creator Studio:** https://handlevault-official.github.io/crisp-creator-studio/
-* **Crisp Math Studio:** https://handlevault-official.github.io/crisp-math-studio/
-* **Crisp Science Studio:** https://handlevault-official.github.io/crisp-science-studio/
-* **Crisp Study Studio:** https://handlevault-official.github.io/crisp-study-studio/
-* **Crisp Music Studio:** https://handlevault-official.github.io/crisp-music-studio/
-* **Crisp Farm Voice Studio:** https://handlevault-official.github.io/crisp-farm-voice-studio/
-* **Crisp Senior Studio:** https://handlevault-official.github.io/crisp-senior-studio/
-
-## 💎 Gumroad Store Hub & Digital Assets
-* **Main Store:** vaultkeeper117.gumroad.com
-* **Crisp Suite Studio Hub (All-Access Pass):** https://vaultkeeper117.gumroad.com/l/ztzxpg
-* **Universal Product Template (Pixel Art Pack):** https://vaultkeeper117.gumroad.com/l/xwzxwp
-* **Free WebM Sample Alert (Resub #3):** https://vaultkeeper117.gumroad.com/l/copzec
-* **Standard MP4 Format Animated Alert File:** https://vaultkeeper117.gumroad.com/l/dkmedq
-* **Pixel Art Ninja Cat (Static Images & 512px Discord Avatars):** https://vaultkeeper117.gumroad.com/l/lhhxej
-* **WebM Animated Alert File:** https://vaultkeeper117.gumroad.com/l/fanvlu
-* **YouTube-MP4 Animated Alert File:** https://vaultkeeper117.gumroad.com/l/aihkjh
-* **Calm Aesthetic Wallpaper Bundle:** https://vaultkeeper117.gumroad.com/l/echfl
-
-## ☕ Support Us
-* **Ko-fi:** https://ko-fi.com/handlevaultofficial
-
-## ⚙️ Features
-* Centralized landing page and portal (`index.html`) hosted via GitHub Pages.
-* Multi-platform payment webhook support and license key generation.
-* Scalable architecture for individual app licenses, bundles, and digital downloads.
+- **Daily Medication & Pill Reminder:** Track medicine schedules, dosages, and mark them as taken with persistent local storage.
+- **Vital Signs Health Log:** Keep a secure history of blood pressure (mmHg) and heart rate (BPM) readings.
+- **Emergency SOS Hub:** Instant access to national hotlines (911) and primary caregiver/family emergency contacts.
+- **High-Contrast Accessibility Themes:** Ergonomic Night/Day shift themes featuring larger fonts and high-visibility layouts for easy reading.
+- **100% Offline & Private:** Runs entirely client-side in your browser with zero login walls or external server tracking.
+- **Single-File Architecture:** Lightweight, fast, and easy to deploy or modify.
 
 ---
-© 2026 Crisp Suite. All rights reserved.
+
+## 🚀 Quick Start / Usage
+
+1. Clone or download the repository.
+2. Open `index.html` in any modern web browser.
+3. (Optional) Deploy instantly via GitHub Pages using the included GitHub Actions workflow.
+
+---
+
+## 📂 Repository Structure
+
+- `index.html` — The core single-file application (UI, health tracking logic, and high-contrast styling).
+- `repo.js` — Shared Crisp Suite repository metadata helper.
+- `manifest.json` — Progressive Web App (PWA) manifest configuration.
+- `.github/workflows/deploy.yml` — Automated GitHub Pages deployment pipeline.
+
+---
+
+## 🌟 Recommended Crisp Suite Apps
+
+Explore other local-first, privacy-focused utilities from the Crisp Suite ecosystem:
+
+- **Crisp Study Studio:** [GitHub Repo](https://github.com/handlevault-official/crisp-study-studio) | [Live App](https://handlevault-official.github.io/crisp-study-studio/)
+- **Crisp Farm Voice Studio:** [GitHub Repo](https://github.com/handlevault-official/crisp-farm-voice-studio) | [Live App](https://handlevault-official.github.io/crisp-farm-voice-studio/)
+- **Crisp Music Studio:** [GitHub Repo](https://github.com/handlevault-official.github.io/crisp-music-studio) | [Live App](https://handlevault-official.github.io/crisp-music-studio/)
+- **Crisp Math Studio:** [GitHub Repo](https://github.com/handlevault-official.github.io/crisp-math-studio) | [Live App](https://handlevault-official.github.io/crisp-math-studio/)
+
+---
+
+## 🛡️ License
+
+Distributed under the **MIT License**. See `LICENSE` for more information.
+
+---
+*Built with ❤️ by [HandleVault](https://github.com/handlevault-official) as part of the Crisp Suite.*
