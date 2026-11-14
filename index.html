@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SeniorStudio — Health Tracker, Meds &amp; Emergency Hub</title>
+<meta name="description" content="Local-first senior citizen health assistant, medication tracker, and emergency hub. Part of the Crisp Suite.">
+<meta name="theme-color" content="#090d16" id="metaThemeColor">
+<script src="https://cdn.tailwindcss.com"></script> 
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+/* Night Shift & High-Contrast Ergonomic Theme (Default) */
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #090d16;
+  --card: #101726;
+  --ink: #f8fafc;
+  --mute: #94a3b8;
+  --accent: #0ea5e9; /* Clear accessible sky blue */
+  --accent-ink: #042f2e;
+  --warn: #fbbf24;
+  --bad: #f87171;
+  --line: #23314d;
+  --field: #0b111e;
+  --btn-bg: #19243b;
+  --btn-hover: #22314f;
+  --btn-line: #3f5580;
+}
+
+/* Day Shift / High Readability Light Mode */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --ink: #0f172a;
+  --mute: #475569;
+  --accent: #0284c7;
+  --accent-ink: #ffffff;
+  --warn: #b45309;
+  --bad: #dc2626;
+  --line: #cbd5e1;
+  --field: #f1f5f9;
+  --btn-bg: #ffffff;
+  --btn-hover: #e2e8f0;
+  --btn-line: #94a3b8;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 18px/1.6 'Plus Jakarta Sans', system-ui, sans-serif; /* Larger default font for clarity */
+  padding: 16px 12px 32px;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+button, input, textarea { font: inherit; color: inherit; }
+
+button {
+  cursor: pointer;
+  border: 2px solid var(--btn-line);
+  background: var(--btn-bg);
+  color: var(--ink);
+  border-radius: 12px;
+  padding: 12px 18px;
+  min-height: 50px;
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  transition: all 0.15s ease;
+}
+button:hover:not(:disabled) {
+  background: var(--btn-hover);
+  border-color: var(--accent);
+}
+button.primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: transparent;
+  font-weight: 800;
+}
+button.primary:hover:not(:disabled) { filter: brightness(1.1); }
+button.danger {
+  background: rgba(248, 113, 113, 0.15);
+  color: var(--bad);
+  border-color: rgba(248, 113, 113, 0.6);
+}
+
+input, textarea {
+  width: 100%;
+  background: var(--field);
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: var(--maintenance-ink, var(--ink));
+  font-size: 1rem;
+  outline: none;
+}
+input:focus, textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.2);
+}
+
+label { display: block; font-size: 15px; color: var(--mute); margin-bottom: 6px; font-weight: 700; }
+
+header.top {
+  max-width: 900px;
+  margin: 0 auto 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: var(--card);
+  border: 2px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.brand { font-weight: 800; color: var(--accent); font-size: 1.4rem; letter-spacing: -0.02em; }
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.tabs button { padding: 10px 16px; min-height: 44px; font-size: 15px; }
+.tabs button.on { background: var(--accent); color: var(--accent-ink); border-color: transparent; font-weight: 800; }
+
+main { max-width: 900px; margin: 0 auto; }
+.card { background: var(--card); border: 2px solid var(--line); border-radius: 16px; padding: 24px; margin-bottom: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.hint { color: var(--mute); font-size: 15px; margin: 6px 0; }
+
+@media(max-width: 768px) {
+  .grid2 { grid-template-columns: 1fr; }
+  header.top { flex-direction: column; align-items: stretch; }
+  .tabs { justify-content: stretch; }
+  .tabs button { flex: 1; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div>
+    <span class="brand">🛡️ SeniorStudio</span>
+    <p class="hint" style="margin:0;">Crisp Suite / HandleVault Care Utility</p>
+  </div>
+  <nav class="tabs" aria-label="Sections">
+    <button data-tab="meds" class="on">Meds</button>
+    <button data-tab="vitals">Vitals</button>
+    <button data-tab="emergency">Emergency</button>
+  </nav>
+  <div class="row">
+    <button id="btnThemeToggle" type="button" style="padding:8px 14px;min-height:40px;font-size:14px;">🌙 Night Shift</button>
+  </div>
+</header>
+
+<main>
+  <!-- TAB 1: MEDICATION TRACKER -->
+  <section id="tab-meds">
+    <div class="card">
+      <h2 style="margin-top:0; font-size:1.2rem; color:var(--accent);">Daily Medication &amp; Pill Reminder</h2>
+      <div class="row" style="margin-bottom: 16px;">
+        <input id="medInput" type="text" placeholder="Medicine Name &amp; Dosage (e.g., Amlodipine 5mg)" style="flex: 2;">
+        <input id="timeInput" type="text" placeholder="Time (e.g., 8:00 AM)" style="flex: 1; min-width: 140px;">
+        <button id="btnAddMed" class="primary">Add Med</button>
+      </div>
+      <div id="medList" style="display: flex; flex-direction: column; gap: 10px;">
+        <!-- Dynamic Meds -->
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 2: VITALS LOG -->
+  <section id="tab-vitals" hidden>
+    <div class="card">
+      <h2 style="margin-top:0; font-size:1.2rem; color:var(--accent);">Vital Signs Health Log</h2>
+      <div class="grid2" style="margin-bottom: 16px;">
+        <div>
+          <label for="bpInput">Blood Pressure (mmHg)</label>
+          <input id="bpInput" type="text" placeholder="e.g., 120/80">
+        </div>
+        <div>
+          <label for="hrInput">Heart Rate (BPM)</label>
+          <input id="hrInput" type="text" placeholder="e.g., 72">
+        </div>
+      </div>
+      <button id="btnSaveVital" class="primary" style="width: 100%;">Save Vitals Entry</button>
+    </div>
+
+    <div class="card">
+      <h2 style="margin-top:0; font-size:1.2rem; color:var(--accent);">Recorded Vitals History</h2>
+      <div id="vitalsList" style="display: flex; flex-direction: column; gap: 10px;">
+        <!-- Dynamic Vitals -->
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 3: EMERGENCY SOS HUB -->
+  <section id="tab-emergency" hidden>
+    <div class="card" style="border-color: var(--bad);">
+      <h2 style="margin-top:0; font-size:1.3rem; color:var(--bad);">🚨 Emergency SOS &amp; Medical Contacts</h2>
+      <p class="hint">Quick access for urgent situations and family notifications.</p>
+      
+      <div style="display: grid; gap: 12px; margin-top: 16px;">
+        <div style="background: var(--field); padding: 16px; border-radius: 12px; border: 2px solid var(--line);">
+          <strong style="font-size: 1.1rem;">Emergency Hotline (National):</strong>
+          <div style="font-size: 1.5rem; font-weight: 800; color: var(--accent); margin-top: 4px;">911</div>
+        </div>
+        <div style="background: var(--field); padding: 16px; border-radius: 12px; border: 2px solid var(--line);">
+          <strong style="font-size: 1.1rem;">Primary Caregiver / Family Contact:</strong>
+          <div id="contactDisplay" style="font-size: 1.2rem; font-weight: 700; margin-top: 4px;">Dr. Santos / Anak: 0917-XXX-XXXX</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const THEME_KEY = 'seniorstudio_theme';
+  const btnTheme = document.getElementById('btnThemeToggle');
+  const metaTheme = document.getElementById('metaThemeColor');
+
+  function applyTheme(theme) {
+    const isLight = theme === 'light';
+    document.documentElement.setAttribute('data-theme', isLight ? 'light' : 'dark');
+    if (btnTheme) btnTheme.textContent = isLight ? '☀️ Day Shift' : '🌙 Night Shift';
+    if (metaTheme) metaTheme.setAttribute('content', isLight ? '#f8fafc' : '#090d16');
+    localStorage.setItem(THEME_KEY, isLight ? 'light' : 'dark');
+  }
+
+  applyTheme(localStorage.getItem(THEME_KEY) || 'dark');
+  btnTheme.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    applyTheme(current === 'light' ? 'dark' : 'light');
+  });
+
+  const tabs = document.querySelectorAll('.tabs button');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('on'));
+      tab.classList.add('on');
+      const target = tab.dataset.tab;
+      document.querySelectorAll('main > section').forEach(sec => {
+        sec.hidden = sec.id !== `tab-${target}`;
+      });
+    });
+  });
+
+  // Medication Tracker Logic
+  const medInput = document.getElementById('medInput');
+  const timeInput = document.getElementById('timeInput');
+  const btnAddMed = document.getElementById('btnAddMed');
+  const medList = document.getElementById('medList');
+  let meds = JSON.parse(localStorage.getItem('senior_meds') || '[{"name": "Amlodipine 5mg", "time": "8:00 AM", "taken": false}, {"name": "Metformin 500mg", "time": "12:00 PM", "taken": false}]');
+
+  function renderMeds() {
+    medList.innerHTML = '';
+    meds.forEach((m, idx) => {
+      const div = document.createElement('div');
+      div.className = 'row';
+      div.style.justify = 'space-between';
+      div.style.background = 'var(--field)';
+      div.style.padding = '14px 18px';
+      div.style.borderRadius = '12px';
+      div.style.border = '2px solid var(--line)';
+      
+      div.innerHTML = `
+        <div>
+          <strong style="font-size: 1.1rem; ${m.taken ? 'text-decoration: line-through; opacity: 0.6;' : ''}">${m.name}</strong>
+          <div class="hint" style="margin:2px 0 0;">Schedule: ${m.time}</div>
+        </div>
+        <div class="row">
+          <button class="${m.taken ? '' : 'primary'}" style="padding: 8px 14px; min-height: 40px;" onclick="window.toggleMed(${idx})">${m.taken ? 'Taken ✓' : 'Mark Taken'}</button>
+          <button class="danger" style="padding: 8px 12px; min-height: 40px;" onclick="window.deleteMed(${idx})">✕</button>
+        </div>
+      `;
+      medList.appendChild(div);
+    });
+  }
+
+  window.toggleMed = (idx) => {
+    meds[idx].taken = !meds[idx].taken;
+    localStorage.setItem('senior_meds', JSON.stringify(meds));
+    renderMeds();
+  };
+
+  window.deleteMed = (idx) => {
+    meds.splice(idx, 1);
+    localStorage.setItem('senior_meds', JSON.stringify(meds));
+    renderMeds();
+  };
+
+  btnAddMed.addEventListener('click', () => {
+    const name = medInput.value.trim();
+    const time = timeInput.value.trim() || 'Anytime';
+    if (name) {
+      meds.push({ name, time, taken: false });
+      localStorage.setItem('senior_meds', JSON.stringify(meds));
+      medInput.value = '';
+      timeInput.value = '';
+      renderMeds();
+    }
+  });
+
+  renderMeds();
+
+  // Vitals Logic
+  const bpInput = document.getElementById('bpInput');
+  const hrInput = document.getElementById('hrInput');
+  const btnSaveVital = document.getElementById('btnSaveVital');
+  const vitalsList = document.getElementById('vitalsList');
+  let vitals = JSON.parse(localStorage.getItem('senior_vitals') || '[{"date": "2026-03-30 08:30 AM", "bp": "120/80", "hr": "72"}]');
+
+  function renderVitals() {
+    vitalsList.innerHTML = '';
+    vitals.forEach((v, idx) => {
+      const div = document.createElement('div');
+      div.className = 'card';
+      div.style.marginBottom = '10px';
+      div.style.padding = '16px 20px';
+      div.style.background = 'var(--field)';
+      
+      div.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+          <span style="font-size:14px; color:var(--accent); font-weight:700;">${v.date}</span>
+          <button class="danger" style="padding:4px 10px; min-height:32px; font-size:14px;" onclick="window.deleteVital(${idx})">Delete</button>
+        </div>
+        <div class="row" style="gap: 20px;">
+          <span>BP: <strong>${v.bp} mmHg</strong></span>
+          <span>Heart Rate: <strong>${v.hr} BPM</strong></span>
+        </div>
+      `;
+      vitalsList.appendChild(div);
+    });
+  }
+
+  window.deleteVital = (idx) => {
+    vitals.splice(idx, 1);
+    localStorage.setItem('senior_vitals', JSON.stringify(vitals));
+    renderVitals();
+  };
+
+  btnSaveVital.addEventListener('click', () => {
+    const bp = bpInput.value.trim();
+    const hr = hrInput.value.trim();
+    if (bp || hr) {
+      const date = new Date().toLocaleString();
+      vitals.unshift({ date, bp: bp || 'N/A', hr: hr || 'N/A' });
+      localStorage.setItem('senior_vitals', JSON.stringify(vitals));
+      bpInput.value = '';
+      hrInput.value = '';
+      renderVitals();
+    }
+  });
+
+  renderVitals();
+})();
+</script>
+<script src="repo.js"></script>
+</body>
+</html>
